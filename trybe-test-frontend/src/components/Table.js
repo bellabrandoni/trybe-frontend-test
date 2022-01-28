@@ -2,10 +2,9 @@ import React from "react";
 import { formatDate } from "../services/formatDate";
 import { usePlanets } from "../hooks/usePlanets";
 
-//helper function para comparar coluna com valo de acordo com o valor de comparation
+
 function makeComparation(column, comparation, value) {
 
-	//valores vêm como string e precisam ser convertidos
 	const numColumn = Number(column);
 	const numValue = Number(value);
 
@@ -16,35 +15,33 @@ function makeComparation(column, comparation, value) {
 	return numColumn > numValue;
 }
 
-// componente para table
+
 export default function Table() {
 
 	const [{ data }, { filters }] = usePlanets();
 
-	//informações dos filtros colocadas fora dos loops para diminuir a complexidade do código
-	const nameFilter = filters.filterByName.name.toLowerCase(); //letras minusculas para comparação ser case sensitive
+	const nameFilter = filters.filterByName.name.toLowerCase(); 
 	const numericFilters = filters.filterByNumericValues;
 	const sortColumn = filters.order.column;
 	const sortMethod = filters.order.sort;
 
-	//array com os devidos planetas filtrados pelo nome
-	const planetsNameFiltred = data.filter(planet => {
-		const planetName = planet.name.toLowerCase(); //letras minusculas para comparação ser case sensitive
 
-		//verifica se o planeta contém o nome escrito no input
+	const planetsNameFiltred = data.filter(planet => {
+		const planetName = planet.name.toLowerCase(); 
+
 		if (planetName.includes(nameFilter)) return true;
 		return false;
 	});
 
-	// array com os devidos planetas filtrados numericamente
+	
 	const planetsNumericFiltred = planetsNameFiltred.filter(planet => {
 		if (numericFilters.length > 0) {
-			//aplica todos filtros numéricos verificando como deve ser aplicado
+			
 			for (let index = 0; index < numericFilters.length; index++) {
 				const numericFilter = numericFilters[index];
 				const columnName = numericFilter.column;
 				const comparation = numericFilter.comparison;
-				const valueToCompare = Number(numericFilter.value); //valor vem como string e precisa ser convertido
+				const valueToCompare = Number(numericFilter.value); 
 				if (!makeComparation(planet[columnName], comparation, valueToCompare)) {
 					return false;
 				}
@@ -55,12 +52,12 @@ export default function Table() {
 		}
 	});
 
-	//array de planetas ordenados
+
 	const planets = planetsNumericFiltred.sort((actual, next) => {
 		const actualValue = actual[sortColumn];
 		const nextValue = next[sortColumn];
 
-		//ordena para textos com numeros e case sensitive verificando se é ASC ou DESC
+		
 		if (sortMethod === "ASC") {
 			return actualValue.localeCompare(nextValue, undefined, { numeric: true, sensitive: "base" });
 		}
