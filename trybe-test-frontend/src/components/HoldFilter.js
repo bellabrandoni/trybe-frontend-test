@@ -3,7 +3,6 @@ import NameFilter from "./NameFilter";
 import NumericFilter from "./NumericFilter";
 import OrderFilter from "./OrderFilter";
 
-
 export default function HoldFilter() {
 
 	return (
