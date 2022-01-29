@@ -10,7 +10,7 @@ export function PlanetsProvider({ children }) {
 	
 	const [data, setData] = useState([]);
 
-	//filtros de busca
+	
 	const [filters, setFilters] = useState({
 		filterByName: {
 			name: ""
@@ -23,6 +23,7 @@ export function PlanetsProvider({ children }) {
 		}
 	});
 
+	
 	useEffect(() => {
 		api.get("planets/")
 			.then(response => {

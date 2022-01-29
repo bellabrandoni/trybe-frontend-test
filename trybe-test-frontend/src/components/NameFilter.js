@@ -1,7 +1,22 @@
-import { useContext } from "react";
-import { PlanetsContext } from "../contexts/PlanetsContext";
+import React from "react";
+import { usePlanets } from "../hooks/usePlanets";
 
-export function usePlanets(){
-	const value = useContext(PlanetsContext);
-	return value;
+//componente para fitrar pelo nome
+export default function NameFilter() {
+
+	const [, { filters, setFilters }] = usePlanets();
+
+	return (
+		<>
+			<input
+				className="form-control"
+				type="text"
+				placeholder="Nome do Planeta"
+				value={filters.filterByName.name}
+				onChange={e => setFilters(filters => {
+					return { ...filters, filterByName: { ...filters.filterByName, name: e.target.value } };
+				})}
+			/>
+		</>
+	);
 }

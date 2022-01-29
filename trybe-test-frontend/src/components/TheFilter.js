@@ -3,7 +3,7 @@ import NameFilter from "./NameFilter";
 import NumericFilter from "./NumericFilter";
 import OrderFilter from "./OrderFilter";
 
-export default function HoldFilter() {
+export default function TheFilter() {
 
 	return (
 		<div className="btn-group">

@@ -9,7 +9,7 @@ export function formatDate(timestamp, input = null) {
 			allDate.getFullYear() > 9 ?
 				"00" + allDate.getFullYear() :
 				"000" + allDate.getFullYear();
-	if (input) // caso seja um input retorna dd-mm-YYYY
+	if (input) 
 		return ano + "-" + mes + "-" + dia;
 	return dia + "/" + mes + "/" + ano;
 }

@@ -44,6 +44,7 @@ export default function NumericFilter() {
 		return true;
 	});
 
+
 	function deleteFilter() {
 		setFilters(filters => {
 			return {
@@ -55,7 +56,7 @@ export default function NumericFilter() {
 		setValue(0);
 	}
 
-	
+
 	function execFilter() {
 		setFilters(filters => {
 			return {

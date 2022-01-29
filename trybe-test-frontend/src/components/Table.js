@@ -5,6 +5,7 @@ import { usePlanets } from "../hooks/usePlanets";
 
 function makeComparation(column, comparation, value) {
 
+	
 	const numColumn = Number(column);
 	const numValue = Number(value);
 
@@ -20,15 +21,17 @@ export default function Table() {
 
 	const [{ data }, { filters }] = usePlanets();
 
-	const nameFilter = filters.filterByName.name.toLowerCase(); 
+	
+	const nameFilter = filters.filterByName.name.toLowerCase();
 	const numericFilters = filters.filterByNumericValues;
 	const sortColumn = filters.order.column;
 	const sortMethod = filters.order.sort;
 
-
+	
 	const planetsNameFiltred = data.filter(planet => {
 		const planetName = planet.name.toLowerCase(); 
 
+		
 		if (planetName.includes(nameFilter)) return true;
 		return false;
 	});
@@ -41,7 +44,7 @@ export default function Table() {
 				const numericFilter = numericFilters[index];
 				const columnName = numericFilter.column;
 				const comparation = numericFilter.comparison;
-				const valueToCompare = Number(numericFilter.value); 
+				const valueToCompare = Number(numericFilter.value); //valor vem como string e precisa ser convertido
 				if (!makeComparation(planet[columnName], comparation, valueToCompare)) {
 					return false;
 				}
@@ -52,7 +55,7 @@ export default function Table() {
 		}
 	});
 
-
+	
 	const planets = planetsNumericFiltred.sort((actual, next) => {
 		const actualValue = actual[sortColumn];
 		const nextValue = next[sortColumn];
